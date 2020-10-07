@@ -1,0 +1,110 @@
+﻿@page
+@model Iteracion_2.Pages.Articulos.RevisionFinalModel
+@{
+    ViewData["Title"] = "RevisionFinal";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Shieldship | Miembros</title>
+
+    <link rel="stylesheet" href="~/css/revisar.css">
+    <link rel="stylesheet" href="~/css/lista-miembros.css">
+    <link rel="stylesheet" href="~/css/article-list-basic.css">
+
+
+    <script src="https://kit.fontawesome.com/8dbd1c7c50.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h3>Artículos Revisados</h3>
+    <div id="mensaje-respuesta">
+        @if (Model.Message != null)
+        {
+            <h4 style="color:green; text-align:center"> @Model.Message</h4>
+        }
+    </div>
+
+    <ul class="article-list-basic">
+        @for (int index = 0; index < Model.ArticulosRevisados.Count; index++)
+         {
+            <li id="@index">
+                <div>
+                    <h2 title="@Model.ArticulosRevisados[index][1]">@Model.ArticulosRevisados[index][1]</h2>
+
+                    <span>
+                        <br />
+                        por
+                        @{
+                            int artIDPk = Int32.Parse(Model.ArticulosRevisados[index][0]);
+                            string titulo = Model.ArticulosRevisados[index][1];
+                            string autoresString = Model.ArticulosRevisados[index][3];
+                            string[] autores = Model.ArticulosRevisados[index][2].Split(',');
+                            string[] usuarios = Model.ArticulosRevisados[index][3].Split(',');
+                            int puntuacion = Int32.Parse(Model.ArticulosRevisados[index][4]);
+                            string comentarios = Model.ArticulosRevisados[index][5];
+                            string revisor = Model.ArticulosRevisados[index][6];
+                            string usuarioRevisor = Model.ArticulosRevisados[index][7];
+                            for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                            {
+                                <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                            }
+                        }
+                    </span>
+                    <br />
+                    <br />
+                    <h4>Resumen de la revisión</h4>
+                    Puntuación: @Model.ArticulosRevisados[index][4]
+                    <br />
+                    Comentarios:
+                    @Model.ArticulosRevisados[index][5]
+                    <br />
+                    Revisado por: <a href="~/Perfil/Perfil?UsuarioURL=@Model.ArticulosRevisados[index][7]">@Model.ArticulosRevisados[index][6]</a>
+                    <br />
+                    <br />
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="cambios" data-autores="@autoresString" data-comments="@comentarios" data-puntos="@puntuacion">Aceptar con cambios</a>
+                    <br />
+                    <br />
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="aceptado" data-autores="@autoresString" data-comments="@comentarios" data-puntos="@puntuacion">Aceptar</a>
+                    <a href="#modalRevisionFinal" type="button" class="read-more openModal" data-toggle="modal" data-target="#modalRevisionFinal" data-articulo="@artIDPk" data-titulo="@titulo" data-estado="rechazado" data-autores="@autoresString" data-comments="@comentarios" data-puntos="@puntuacion">Rechazar</a>
+
+                    <div class="modal fade" id="modalRevisionFinal" tabindex="-1" role="dialog" aria-labelledby="modalRevisionFinalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="modalRevisionFinalLabel">¿Seguro que desea elegir esta opción como revisión a este artículo?</h4>
+
+                                </div>
+                                <form asp-page-handler="send" method="post">
+                                    <div class="modal-body">
+                                        <input id="artId" type="hidden" name="artID" runat="server" />
+                                        <input id="titulo" type="hidden" name="titulo" runat="server" />
+                                        <input id="estado" type="hidden" name="estado" runat="server" />
+                                        <input id="autoresString" type="hidden" name="autoresString" runat="server" />
+                                        <input id="comentarios" type="hidden" name="comentarios" runat="server" />
+                                        <input id="puntuacion" type="hidden" name="puntuacion" runat="server" />
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+         }
+    </ul>
+
+<script src="~/js/site.js"></script>
+</body>
+</html>
+
+
+
+

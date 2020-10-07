@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shieldship | @ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-page="/Index" class="navbar-brand">𝕾𝖍𝖎𝖊𝖑𝖉𝖘𝖍𝖎𝖕</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a >Articulos</a></li>
+                    <li><a asp-page="/Miembros/Miembros">Miembros</a></li>
+                    <li><a asp-page="/Correo/Correo">Correo</a></li>
+                    <li><a asp-page="/Analitica/Reporte">Reporte</a></li>
+                </ul>
+
+                <div class="dropdown topnav navbar-left">
+                    <div class="navbar-nav">Preguntas</div>
+                    <div class="dropdown-content">
+                        <ul class="nav">
+                            <li><a >Mostrar preguntas</a></li>
+                            <li><a >Agregar pregunta frecuente</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                @{
+                    var miembroSession = new Byte[20];
+                    var pesoSession = new Byte[20];
+                    var tipoSession = new Byte[20];
+                    
+                   
+                    bool nameOK = Context.Session.TryGetValue("UsuarioActual", out miembroSession);
+                    bool pesoOK = Context.Session.TryGetValue("PesoActual", out pesoSession);
+                    bool tipoOK = Context.Session.TryGetValue("TipoActual", out tipoSession);
+                    string miembroActual = "";
+                    string pesoActual = "";
+                    string tipoActual = "";
+                    if (nameOK && pesoOK)
+                    {
+                        miembroActual = System.Text.Encoding.UTF8.GetString(miembroSession);
+                        pesoActual = System.Text.Encoding.UTF8.GetString(pesoSession);
+                        tipoActual = System.Text.Encoding.UTF8.GetString(tipoSession);
+                    }
+                }
+
+                <div class="dropdown topnav navbar-right">
+                    @if (miembroActual != "")
+                    {
+                        <div class="navbar-nav"> @miembroActual </div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
+                                <li><a asp-page="/Perfil/Perfil">Perfil</a></li>
+                                <li><a asp-page="/Perfil/EditarPerfil">Editar perfil</a></li>
+                                <li><a >Mis articulos</a></li>
+                                @if (pesoActual == "5")
+                                {
+                                    <li><a asp-page="/Articulos/Revision">Revisar</a></li>
+                                    @if (tipoActual == "coordinador")
+                                    {
+                                        <li><a asp-page="/Articulos/RevisionFinal">Revisiones</a></li>
+                                    }
+                                }
+                                <li><a asp-page="/Cuenta/Desconectar">Desconectarse</a></li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+
+                @if (miembroActual == "")
+                {
+                    <div class="dropdown topnav navbar-right">
+                        <div class="navbar-nav">Cuenta</div>
+                        <div class="dropdown-content">
+                            <ul class="nav">
+                                <li><a asp-page="/Cuenta/Registrar">Registrarse</a></li>
+                                <li><a asp-page="/Cuenta/Ingresar">Ingresar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                 }
+                </div>
+                               
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2020 - Shieldship</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
