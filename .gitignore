@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # Conexión a la base de datos. Como es local hay que ignorarla.
-Iteracion_2/Iteracion_2/Models/ConexionModel.cs
+ConexionModel.cs
