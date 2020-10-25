@@ -120,3 +120,12 @@ CREATE TABLE Nucleo_Revisa_Articulo(
 		ON DELETE CASCADE
 )
 
+CREATE TABLE Miembro_Recomienda(
+	nombreUsuarioFK VARCHAR(50) NOT NULL,
+	artIdFK INTEGER NOT NULL,
+	titulo VARCHAR(MAX),
+	comentario VARCHAR(MAX)
+
+	CONSTRAINT PK_Miembro_Recomienda PRIMARY KEY(nombreUsuarioFK,artIdFK)
+)
+
