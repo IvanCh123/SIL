@@ -38,6 +38,25 @@ namespace Iteracion_2.Models
             return Results;
         }
 
+        internal List<List<string>> RetornarArticulos()
+        {
+            DataTable dTable = new DataTable();
+
+            Connection();
+
+            string query = "SELECT A.artIdPK, A.titulo, A.resumen, M.nombre +' '+M.apellido AS [Autor], M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON MA.nombreUsuarioFK = M.nombreUsuarioPK ORDER BY A.titulo";
+
+            SqlCommand command = new SqlCommand(query, con)
+            {
+                CommandType = CommandType.Text
+            };
+
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(dTable);
+
+            return LlenarArticulos(dTable, "todos");
+        }
+
         public void MarcarArticuloSolicitado(int artIdPk)
         {
             List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();
@@ -150,10 +169,10 @@ namespace Iteracion_2.Models
             adapter.Fill(dTable);
 
 
-            return LlenarArticulos(dTable);
+            return LlenarArticulos(dTable, "pendientes");
         }
 
-        private List<List<string>> LlenarArticulos(DataTable dTable) {
+        private List<List<string>> LlenarArticulos(DataTable dTable, string tipo) {
             List<List<string>> ArticulosRetorno = new List<List<string>>();
 
             for (int index = 0; index < dTable.Rows.Count; index++)
@@ -184,12 +203,26 @@ namespace Iteracion_2.Models
                         }
                     }
 
-                    ArticulosRetorno.Add(new List<string> {
+                    if (tipo.Equals("pendientes"))
+                    {
+                        ArticulosRetorno.Add(new List<string> {
                                     dTable.Rows[index][0].ToString(), // artIdPK
                                     dTable.Rows[index][1].ToString(), // titulo
                                     autores,
                                     usuarios,
-                    });
+                        });
+                    }
+                    else if (tipo.Equals("todos")) {
+                        ArticulosRetorno.Add(new List<string> {
+                                    dTable.Rows[index][0].ToString(), // artIdPK
+                                    dTable.Rows[index][1].ToString(), // titulo
+                                    dTable.Rows[index][2].ToString(), // resumen
+                                    autores,
+                                    usuarios,
+                        });
+                    }
+
+                    
                 }
             }
 

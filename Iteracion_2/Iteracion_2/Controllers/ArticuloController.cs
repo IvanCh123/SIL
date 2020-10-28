@@ -9,60 +9,54 @@ namespace Iteracion_2.Controllers
 {
     public class ArticuloController : Controller
     {
-        private ArticuloModel ArticuloModel { get; set; }
+        private ArticuloModel ArticuloModel = new ArticuloModel();
 
         public List<List<string>> RetornarArticulosPendientes(string nombreUsuarioActual, string estado)
         {
-            ArticuloModel = new ArticuloModel();
-
             return ArticuloModel.RetornarArticulosPendientes(nombreUsuarioActual, estado);
+        }
+
+        public List<List<string>> RetornarArticulos()
+        {
+            return ArticuloModel.RetornarArticulos();
         }
 
         public List<List<string>> RetornarRevisados ()
         {
-            ArticuloModel = new ArticuloModel();
-
             return ArticuloModel.RetornarRevisados();
         }
 
         public string[] RetornarDatos(string artId) {
-            ArticuloModel = new ArticuloModel();
             return ArticuloModel.RetornarDatos(artId);
-
         }
 
         public List<string> RetornarAutor(string artId)
         {
-            ArticuloModel = new ArticuloModel();
             return ArticuloModel.RetornarAutor(artId);
-
         }
 
-        public void MarcarArtSolicitado(int artID) {
-            ArticuloModel = new ArticuloModel();
+        public void MarcarArtSolicitado(int artID)
+        {
             ArticuloModel.MarcarArticuloSolicitado(artID);
-
         }
 
-        public void AsignarArticulo(int articuloId, string[] revisores) {
-            ArticuloModel = new ArticuloModel();
+        public void AsignarArticulo(int articuloId, string[] revisores)
+        {
             ArticuloModel.AsignarArticulo(articuloId, revisores);
         }
 
-        public List<List<string>> RetornarResultadoSolicitud(int articuloId) {
-            ArticuloModel = new ArticuloModel();
+        public List<List<string>> RetornarResultadoSolicitud(int articuloId)
+        {
             return ArticuloModel.RetornarResultadoSolicitud(articuloId);
         }
 
         public void ModificarEstadoSolicitud(int artID, string nombreUsuarioActual, string estadoSolicitud)
         {
-            ArticuloModel = new ArticuloModel();
             ArticuloModel.ModificarEstadoSolicitud(artID, nombreUsuarioActual, estadoSolicitud);
         }
 
         public void ModificarEstadoArticulo(int artID, string estadoRevision, int puntuacion)
         {
-            ArticuloModel = new ArticuloModel();
             ArticuloModel.ModificarEstadoArticulo(artID, estadoRevision,puntuacion);
         }
     }
