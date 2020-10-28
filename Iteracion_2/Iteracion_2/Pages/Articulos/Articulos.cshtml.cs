@@ -12,7 +12,7 @@ namespace Iteracion_2.Pages.Articulos
         private const string Location = "http://localhost:51359/Articulos";
         public void OnGet()
         {
-            Response.Redirect(Location);
+            //Response.Redirect(Location);
         }
     }
 }

@@ -1,0 +1,65 @@
+﻿@page
+@model Iteracion_2.Pages.Articulos.TodosArticulosModel
+@{
+    ViewData["Title"] = "TodosArticulos";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Shieldship | Articulos</title>
+    
+    <link rel="stylesheet" type="text/css" href="~/css/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+</head>
+
+<body>
+
+    <h3>Mostrando todos los artículos.</h3>
+    <br />
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <!--Se podría hacer un for con los nombres de las columnas-->
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Aquí hacer el for con los datos-->
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+            </tr>
+
+            <tr>
+                <td>Fila3</td>
+                <td>Fila3</td>
+            </tr>
+
+            <tr>
+                <td>Fila4</td>
+                <td>Fila4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @section Scripts{
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });
+        </script>
+
+    }
+</body>
+</html>
+
+
+
