@@ -57,6 +57,11 @@ namespace Iteracion_2.Models
             return LlenarArticulos(dTable, "todos");
         }
 
+        public List<List<string>> validarRetornoArticulos()
+        {
+            return RetornarArticulos();
+        }
+
         public void MarcarArticuloSolicitado(int artIdPk)
         {
             List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();
