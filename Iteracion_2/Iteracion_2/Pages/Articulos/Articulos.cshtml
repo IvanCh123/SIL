@@ -1,7 +1,7 @@
 ﻿@page
-@model Iteracion_2.Pages.Articulos.TodosArticulosModel
+@model Iteracion_2.Pages.Articulos.Articulos
 @{
-    ViewData["Title"] = "TodosArticulos";
+    ViewData["Title"] = "Articulos";
 }
 
 <html>
@@ -15,37 +15,37 @@
 
 <body>
 
-    <h3>Mostrando todos los artículos.</h3>
+    <h3><strong>Mostrando todos los artículos.</strong></h3>
     <br />
 
     <table id="myTable" class="display">
         <thead>
             <tr>
-                <!--Se podría hacer un for con los nombres de las columnas-->
-                <th>Column 1</th>
-                <th>Column 2</th>
+                @for (int index = 0; index < Model.Columnas.Length;index++) {
+                    <th>@Model.Columnas[index]</th>
+                }
             </tr>
         </thead>
         <tbody>
             <!--Aquí hacer el for con los datos-->
-            <tr>
-                <td>Row 1 Data 1</td>
-                <td>Row 1 Data 2</td>
-            </tr>
-            <tr>
-                <td>Row 2 Data 1</td>
-                <td>Row 2 Data 2</td>
-            </tr>
+            @for (int index = 0; index < Model.ArticulosList.Count; index++) {
+                        // 0 = artid 1 = titulo 2 = resumen 3 = autores 4 = usuarios
+                        String[] autores = Model.ArticulosList[index][3].Split(",");
+                        String[] usuarios = Model.ArticulosList[index][4].Split(",");
 
-            <tr>
-                <td>Fila3</td>
-                <td>Fila3</td>
-            </tr>
-
-            <tr>
-                <td>Fila4</td>
-                <td>Fila4</td>
-            </tr>
+                <tr>
+                    <td>@Model.ArticulosList[index][1]</td>
+                    <td>@Model.ArticulosList[index][2]</td>
+                    <td>
+                        @for (int indexJ = 0; indexJ < autores.Length; indexJ++) {
+                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                        }
+                    </td>
+                    <td>
+                        <a href="~/Articulos/Detalles?ID=@Model.ArticulosList[index][0]">Ver más</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 

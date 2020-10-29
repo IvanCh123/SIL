@@ -24,4 +24,10 @@
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Articulos\Detalles.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

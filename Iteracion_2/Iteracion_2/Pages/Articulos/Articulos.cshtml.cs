@@ -8,15 +8,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Iteracion_2.Pages.Articulos
 {
-    public class TodosArticulosModel : PageModel
+    public class Articulos : PageModel
     {
-        ArticuloController ArticuloController { set; get; }
+        private ArticuloController ArticuloController { set; get; }
+        public List<List<string>> ArticulosList { get; set; }
 
-        public List<List<string>> Articulos { get; set; }
+        public String[] Columnas = { "Titulo", "Resumen", "Autor", "Link" };
+
         public void OnGet()
         {
             ArticuloController = new ArticuloController();
-            Articulos = ArticuloController.RetornarArticulos();
+            ArticulosList = ArticuloController.RetornarArticulos();
             //Response.Redirect(Location);
         }
     }
