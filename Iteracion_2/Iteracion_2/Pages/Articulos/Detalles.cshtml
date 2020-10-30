@@ -41,7 +41,7 @@
     <div class="row ">
         <div class="col-md-7 no-float">
             <div class="row">
-                <div class="col-md-12 no-float" style="background: -webkit-linear-gradient(bottom, #f0f0f0, #bdbdbd); border:2px solid black;"><h2>ID del articulo actual: @Model.idArticulo</h2></div>
+                <div class="col-md-12 no-float" style="background: -webkit-linear-gradient(bottom, #f0f0f0, #bdbdbd); border:2px solid black;"><h2>@Model.InformacionArticulo[0]</h2></div>
             </div>
 
             <br>
@@ -54,10 +54,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-5">
-                    <b>Autor: </b>Shinji Nakagawa
+                    <b>Autor: </b>@Model.Autores
                 </div>
                 <div class="col-lg-6">
-                    <b>Topicos: </b>Ciencias, matematicas
+                    <b>Topicos: </b>@Model.topics
                 </div>
             </div>
             <br>
@@ -87,15 +87,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-offset-0">
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sollicitudin dignissim imperdiet volutpat, curabitur vivamus hac sagittis hendrerit integer vestibulum ad eros torquent.
-                        Quisque torquent malesuada eget per morbi leo tellus egestas fames nec,
-                        sodales ridiculus proin nisi tempus parturient himenaeos mattis primis. Sapien nostra gravida potenti ligula diam sollicitudin, ultricies congue elementum pretium parturient cras,
-                        molestie sociis integer curae praesent.
-
-                        Cras venenatis bibendum nec magna mus auctor hac vitae, sociis aenean at mi purus lectus sed etiam, sagittis eros nunc gravida metus egestas tellus. Pellentesque cum tellus mauris
-                        malesuada himenaeos velit inceptos potenti enim primis vehicula aliquam, suspendisse molestie vel at diam venenatis tincidunt lobortis laoreet nulla. Rhoncus convallis mollis diam
-                        libero nulla dictum torquent eget vehicula, enim conubia vulputate posuere felis porttitor commodo hendrerit taciti velit, pellentesque sodales bibendum aptent condimentum suscipit
-                        tristique nostra.
+                        @Model.InformacionArticulo[1]
                     </p>
                 </div>
             </div>
@@ -142,7 +134,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <button type="submit" class="btn btn-primary button1">Recomendar</button>
+                            <button type="submit" class="btn btn-primary button1">Articulos relacionados</button>
                         </div>
                     </div>
                     <br>
