@@ -35,6 +35,11 @@ namespace Iteracion_2.Controllers
             return ArticuloModel.RetornarAutor(artId);
         }
 
+        public List<string> RetornarTopico(string artId)
+        {
+            return ArticuloModel.RetornarTopicos(artId);
+        }
+
         public void MarcarArtSolicitado(int artID)
         {
             ArticuloModel.MarcarArticuloSolicitado(artID);

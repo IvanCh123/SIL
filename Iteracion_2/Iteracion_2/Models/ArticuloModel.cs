@@ -56,12 +56,31 @@ namespace Iteracion_2.Models
 
             return LlenarArticulos(dTable, "todos");
         }
-
         public List<List<string>> validarRetornoArticulos()
         {
             return RetornarArticulos();
         }
-
+        public List<string> RetornarTopicos(string artId)
+        {
+            List<string> topicos = new List<string>();
+            string queryString = "Select T.nombre FROM Topico T JOIN Art_Topico AR ON T.topicoIdPK = AR.topicoIdFK  JOIN Articulo A ON A.artIdPK = AR.artIdFK WHERE artIdFK = " + artId;
+            Connection();
+            SqlCommand command = new SqlCommand(queryString, con)
+            {
+                CommandType = CommandType.Text
+            };
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        topicos.Add(reader[0].ToString());
+                    }
+                }
+            }
+            return topicos;
+        }
         public void MarcarArticuloSolicitado(int artIdPk)
         {
             List<String> nombresUsuarioNucleo = RecuperarNombresUsuarioNucleo();

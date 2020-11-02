@@ -1,6 +1,6 @@
-﻿USE [master]
+USE [master]
 GO
-/****** Object:  Database [BD_Administracion]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Database [BD_Administracion]    Script Date: 11/2/2020 1:09:23 PM ******/
 CREATE DATABASE [BD_Administracion]
  CONTAINMENT = NONE
 GO
@@ -75,7 +75,7 @@ ALTER DATABASE [BD_Administracion] SET QUERY_STORE = OFF
 GO
 USE [BD_Administracion]
 GO
-/****** Object:  Table [dbo].[Art_Topico]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Art_Topico]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,7 +90,7 @@ CREATE TABLE [dbo].[Art_Topico](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Miembro]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Miembro]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Miembro_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Miembro_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +155,24 @@ CREATE TABLE [dbo].[Miembro_Articulo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Nucleo_Revisa_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Miembro_Recomienda]    Script Date: 11/2/2020 1:09:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Miembro_Recomienda](
+	[nombreUsuarioFK] [varchar](50) NOT NULL,
+	[artIdFK] [int] NOT NULL,
+	[titulo] [varchar](max) NULL,
+	[comentario] [varchar](max) NULL,
+ CONSTRAINT [PK_Miembro_Recomienda] PRIMARY KEY CLUSTERED 
+(
+	[nombreUsuarioFK] ASC,
+	[artIdFK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Nucleo_Revisa_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,7 +193,7 @@ CREATE TABLE [dbo].[Nucleo_Revisa_Articulo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Nucleo_Solicita_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Nucleo_Solicita_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -192,7 +209,7 @@ CREATE TABLE [dbo].[Nucleo_Solicita_Articulo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Pregunta_Frecuente]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Pregunta_Frecuente]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -208,7 +225,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Topico]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Table [dbo].[Topico]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -344,7 +361,7 @@ INSERT [dbo].[Topico] ([topicoIdPK], [categoria], [nombre]) VALUES (3, N'Literat
 INSERT [dbo].[Topico] ([topicoIdPK], [categoria], [nombre]) VALUES (5, N'Medicina', N'Epidemiología')
 INSERT [dbo].[Topico] ([topicoIdPK], [categoria], [nombre]) VALUES (4, N'Psicología', N'Motivación')
 SET IDENTITY_INSERT [dbo].[Topico] OFF
-/****** Object:  Index [PK_TopicoIdPk]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Index [PK_TopicoIdPk]    Script Date: 11/2/2020 1:09:23 PM ******/
 ALTER TABLE [dbo].[Topico] ADD  CONSTRAINT [PK_TopicoIdPk] PRIMARY KEY NONCLUSTERED 
 (
 	[topicoIdPK] ASC
@@ -406,7 +423,7 @@ ON DELETE SET DEFAULT
 GO
 ALTER TABLE [dbo].[Pregunta_Frecuente] CHECK CONSTRAINT [FK_Pregunta_Miembro]
 GO
-/****** Object:  StoredProcedure [dbo].[AumentarMeritoAutor]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[AumentarMeritoAutor]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -418,8 +435,9 @@ AS
 	Update Miembro
 	SET merito = merito + @aumento
 	WHERE Miembro.nombreUsuarioPK = @nombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[Borrar_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Borrar_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -433,8 +451,9 @@ BEGIN
 DELETE FROM dbo.Articulo
 WHERE artIdPK = @ID 
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Borrar_Categoria]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Borrar_Categoria]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -448,8 +467,9 @@ BEGIN
 DELETE FROM dbo.Art_Categoria
 WHERE artIdFK = @ID 
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[BorrarPreguntaFrecuente]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[BorrarPreguntaFrecuente]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -463,8 +483,9 @@ BEGIN
 	DELETE FROM dbo.Pregunta_Frecuente 
 	WHERE pregIdPK = @PregID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[CambiarEstadoArticulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[CambiarEstadoArticulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -480,8 +501,9 @@ BEGIN
 	SET estado = @ESTADO
 	WHERE artIdPK = @ArtID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[CrearCuenta]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[CrearCuenta]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -491,8 +513,9 @@ CREATE PROCEDURE [dbo].[CrearCuenta]
 AS
 	INSERT INTO dbo.Miembro 
 	VALUES(@nombreUsuario, @nombre, @apellido,0,'','',@pais,@habilidades,@idioma,@hobbies,'',@correo,0,'periferico')
+
 GO
-/****** Object:  StoredProcedure [dbo].[CrearPerfil]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[CrearPerfil]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -502,8 +525,9 @@ CREATE PROCEDURE [dbo].[CrearPerfil]
 AS
 	INSERT INTO dbo.Perfil (nombreUsuarioFK,informacionLaboral,informacionBiografica,telefono,correo, merito)
 	VALUES(@nombreUsuarioFK, @infoLaboral, @infoBiografico, @telefono, @correo , @merito)
+
 GO
-/****** Object:  StoredProcedure [dbo].[DisminuirMeritoAutor]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[DisminuirMeritoAutor]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -515,8 +539,9 @@ AS
 	Update Miembro
 	SET merito = merito - @aumento
 	WHERE Miembro.nombreUsuarioPK = @nombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[DisminuirPuntuacion]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[DisminuirPuntuacion]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -528,8 +553,9 @@ AS
 	Update Articulo
 	SET puntuacionInicial = puntuacionInicial - @valor
 	WHERE Articulo.artIdPK = @artID
+
 GO
-/****** Object:  StoredProcedure [dbo].[EditarPreguntaFrecuente]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[EditarPreguntaFrecuente]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -546,8 +572,9 @@ BEGIN
 	SET pregunta = @Pregunta, respuesta = @Respuesta
 	WHERE pregIdPK = @PregID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Guardar_Catergoria_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Guardar_Catergoria_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -555,8 +582,9 @@ GO
 CREATE PROCEDURE [dbo].[Guardar_Catergoria_Articulo] (@artID int, @catId int)
 AS
 	INSERT INTO Art_Categoria VALUES (@catId,@artID)
+
 GO
-/****** Object:  StoredProcedure [dbo].[Guardar_Miembro_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Guardar_Miembro_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -565,8 +593,9 @@ CREATE PROCEDURE [dbo].[Guardar_Miembro_Articulo](@artID int, @miembroId varchar
 
 AS
 	INSERT INTO Miembro_Articulo VALUES (@miembroId,@artID)
+
 GO
-/****** Object:  StoredProcedure [dbo].[GuardarPreguntaFrecuente]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[GuardarPreguntaFrecuente]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -582,8 +611,9 @@ BEGIN
 	INSERT INTO Pregunta_Frecuente (pregunta, respuesta, nombreUsuarioFK) 
 	VALUES(@Pregunta, @Respuesta, @Username)
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[IncrementarVisitas]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[IncrementarVisitas]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -594,8 +624,9 @@ AS
 	Update Articulo
 	SET visitas = visitas + 1
 	Where artIdPK = @artID
+
 GO
-/****** Object:  StoredProcedure [dbo].[ingresarPuntuacionAutor]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[ingresarPuntuacionAutor]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -607,8 +638,9 @@ AS
 	UPDATE Perfil
 	SET merito = merito + @puntuacion
 	WHERE nombreUsuarioFK = @miembroID
+
 GO
-/****** Object:  StoredProcedure [dbo].[Modificar_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Modificar_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -627,8 +659,9 @@ resumen=@resumenNuevo,
 contenido=@contenidoNuevo
 WHERE artIdPK = @ID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Modificar_Articulo_Largo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Modificar_Articulo_Largo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -652,8 +685,9 @@ estado=@estadoNuevo,
 nombreArchivo = @nombreArch
 WHERE artIdPK = @ID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Modificar_Articulo_Y_Revision]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Modificar_Articulo_Y_Revision]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -675,8 +709,9 @@ BEGIN
 	estado = @estadoNuevo
 	WHERE artIdPK = @ID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Modificar_Titulo_Resumen]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Modificar_Titulo_Resumen]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -695,8 +730,9 @@ resumen=@resumenNuevo,
 estado=@estadoNuevo
 WHERE artIdPK = @ID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[ModificarPeso]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[ModificarPeso]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -708,8 +744,9 @@ AS
 	Update Miembro
 	Set pesoMiembro = @peso
 	WHERE nombreUsuarioPK = @nombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[ModificarPuntuacion]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[ModificarPuntuacion]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -721,8 +758,9 @@ AS
 	Update Articulo
 	SET puntuacionInicial = puntuacionInicial + @valor
 	WHERE Articulo.artIdPK = @artID
+
 GO
-/****** Object:  StoredProcedure [dbo].[Mostrar_Autores_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Mostrar_Autores_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -737,8 +775,9 @@ ON M.nombreUsuarioPK = MA.nombreUsuarioFK
 JOIN dbo.Articulo A 
 ON MA.artIdFK = A.artIdPK
 WHERE artIdFK = @articuloId
+
 GO
-/****** Object:  StoredProcedure [dbo].[Mostrar_Categoria_Articulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Mostrar_Categoria_Articulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -755,8 +794,9 @@ ON A.artIdPK = AC.artIdFK
 JOIN Categoria C ON C.categoriaIdPk = AC.categoriaIdFk
 WHERE A.artIdPK = @ID
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[Obtener_articuloId]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Obtener_articuloId]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -766,8 +806,9 @@ AS
 	SELECT A.artIdPK
 	FROM Articulo A
 	Where A.titulo = @titulo
+
 GO
-/****** Object:  StoredProcedure [dbo].[Obtener_CategoriaID]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Obtener_CategoriaID]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -777,8 +818,9 @@ AS
 	SELECT C.categoriaIdPK
 	FROM Categoria C
 	WHERE C.nombre = @nombre
+
 GO
-/****** Object:  StoredProcedure [dbo].[ObtenerCorreo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[ObtenerCorreo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -788,8 +830,9 @@ AS
 	SELECT P.correo
 	FROM Miembro P
 	WHERE P.nombreUsuarioPK = @nombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[obtenerMiembroID]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[obtenerMiembroID]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -799,8 +842,9 @@ AS
 	SELECT M.nombreUsuarioPK
 	FROM Miembro M
 	WHERE M.nombre = @nombre
+
 GO
-/****** Object:  StoredProcedure [dbo].[Recuperar_Categorias]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Recuperar_Categorias]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -810,8 +854,9 @@ CREATE PROCEDURE [dbo].[Recuperar_Categorias]
 AS
 	SELECT C.nombre
 	From Categoria C
+
 GO
-/****** Object:  StoredProcedure [dbo].[Recuperar_Correos]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[Recuperar_Correos]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -822,8 +867,9 @@ BEGIN
 SELECT correo
 FROM Perfil
 END;
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarArticulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarArticulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -835,8 +881,9 @@ AS
 SELECT * 
 FROM Articulo
 WHERE artIdPK = @ID
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarAutores]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarAutores]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -847,8 +894,9 @@ AS
 	SELECT MA.nombreUsuarioFK
 	FROM Miembro_Articulo MA
 	WHERE MA.artIdFK = @artID
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarEstadoArticulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarEstadoArticulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -860,8 +908,9 @@ AS
 	FROM Articulo A
 	WHERE A.artIdPK = @artID
 
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarPesoMiembro]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarPesoMiembro]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -872,8 +921,9 @@ AS
 	SELECT M.pesoMiembro,M.tipo
 	FROM Miembro M
 	WHERE M.nombreUsuarioPK = @NombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarPreguntasFrecuentes]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarPreguntasFrecuentes]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -884,8 +934,9 @@ BEGIN
 	SELECT * 
 	FROM dbo.Pregunta_Frecuente
 END
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarPuntuacionArticulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarPuntuacionArticulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -896,8 +947,9 @@ AS
 	SELECT A.puntuacionInicial
 	FROM Articulo A
 	WHERE A.artIdPK = @artID
+
 GO
-/****** Object:  StoredProcedure [dbo].[RecuperarTodosUsuarios]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RecuperarTodosUsuarios]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -908,8 +960,9 @@ SELECT M.nombreUsuarioPK, M.nombre, P.correo, P.merito, M.pesoMiembro
 FROM dbo.Miembro M JOIN dbo.Perfil P
 	 ON M.nombreUsuarioPK = P.nombreUsuarioFK
 ORDER BY M.pesoMiembro DESC, M.nombre ASC
+
 GO
-/****** Object:  StoredProcedure [dbo].[RetornarDatosPerfil]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RetornarDatosPerfil]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -921,8 +974,9 @@ AS
 SELECT M.nombre, M.pesoMiembro, M.informacionLaboral, M.informacionBiografica, M.telefono, M.correo, M.merito
 FROM dbo.Miembro M
 WHERE M.nombreUsuarioPK = @userName
+
 GO
-/****** Object:  StoredProcedure [dbo].[RetornarNombreUsuario]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[RetornarNombreUsuario]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -933,8 +987,9 @@ AS
 	SELECT M.nombreUsuarioPK
 	From Miembro M
 	Where M.nombre = @nombreM
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_GuardarArticulos]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_GuardarArticulos]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -945,8 +1000,9 @@ CREATE PROCEDURE [dbo].[USP_GuardarArticulos]
 AS
 	INSERT INTO Articulo
 	VALUES(@titulo, @resumen, @contenido, @puntuacion,@visitas, @estado,@tipoArt,@nombreArchivo,@fecha,@like,@dislike)
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloPorTitulo]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloPorTitulo]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -958,8 +1014,9 @@ AS
 SELECT A.artIdPK, A.titulo, A.resumen
 FROM Articulo A
 WHERE A.titulo LIKE '%'+@titulo+'%'
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloPorTopico]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloPorTopico]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -974,8 +1031,9 @@ FROM Articulo A JOIN dbo.Art_Topico AT
 JOIN dbo.Topico T
 	ON AT.topicoIdFK = T.topicoIdPK
 WHERE T.topicoIdPK = @Id
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticulos]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticulos]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -985,8 +1043,9 @@ CREATE PROCEDURE [dbo].[USP_RecuperarArticulos]
 AS
 SELECT DISTINCT A.artIdPK, A.titulo, A.resumen
 FROM Articulo A
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloTituloTopico]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_RecuperarArticuloTituloTopico]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1004,8 +1063,9 @@ FROM Articulo A JOIN dbo.Art_Topico AT
 JOIN dbo.Topico T
 	ON AT.topicoIdFK = T.topicoIdPK
 WHERE (T.topicoIdPK = @Id AND A.titulo LIKE '%'+@titulo+'%')
+
 GO
-/****** Object:  StoredProcedure [dbo].[USP_RecuperarDatosPerfil]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[USP_RecuperarDatosPerfil]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1016,8 +1076,9 @@ AS
 SELECT M.nombre,M.apellido, M.pesoMiembro, M.informacionLaboral, M.informacionBiografica, M.telefono, M.correo, M.merito, M.pais, M.habilidades, M.idiomas, M.hobbies
 FROM dbo.Miembro M 
 WHERE M.nombreUsuarioPK = @nombreUsuario
+
 GO
-/****** Object:  StoredProcedure [dbo].[VerificarNombreUsuario]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  StoredProcedure [dbo].[VerificarNombreUsuario]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1033,8 +1094,9 @@ AS
 	BEGIN
 		SELECT 0
 	END
+
 GO
-/****** Object:  Trigger [dbo].[TR_AU_BorrarRevisiones]    Script Date: 10/7/2020 5:35:14 PM ******/
+/****** Object:  Trigger [dbo].[TR_AU_BorrarRevisiones]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1050,10 +1112,11 @@ CREATE TRIGGER [dbo].[TR_AU_BorrarRevisiones] ON
 					DELETE FROM Nucleo_Revisa_Articulo
 					WHERE artIdFK = @artId;
 				END
+
 GO
 ALTER TABLE [dbo].[Articulo] ENABLE TRIGGER [TR_AU_BorrarRevisiones]
 GO
-/****** Object:  Trigger [dbo].[TR_AI_BorrarSolicitud]    Script Date: 10/7/2020 5:35:15 PM ******/
+/****** Object:  Trigger [dbo].[TR_AI_BorrarSolicitud]    Script Date: 11/2/2020 1:09:23 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1067,6 +1130,7 @@ BEGIN
 	WHERE artIdFK= @artID
 	PRINT 'Se borra la tupla en la tabla nucleo solicita articulo'
 END
+
 GO
 ALTER TABLE [dbo].[Nucleo_Revisa_Articulo] ENABLE TRIGGER [TR_AI_BorrarSolicitud]
 GO
