@@ -47,8 +47,6 @@ namespace Iteracion_2.Pages.Articulos
                 }
                 topics += Topicos[index] + " ";
             }
-
-
         }
     }
 }
