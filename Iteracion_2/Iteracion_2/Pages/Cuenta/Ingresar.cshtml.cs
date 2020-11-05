@@ -12,7 +12,7 @@ namespace Iteracion_2.Pages.Cuenta
 {
     public class IngresarModel : PageModel
     {
-
+        const string SessionKeyURL = "PreviousURL";
         private MiembroController MiembroController { set; get; }
 
         public void OnGet(string Mensaje)
@@ -48,7 +48,9 @@ namespace Iteracion_2.Pages.Cuenta
                 HttpContext.Session.SetString("PesoActual", pesoMiembro);
                 HttpContext.Session.SetString("TipoActual", tipo);
 
-                return RedirectToPage("/Perfil/Perfil");
+                String PreviousURL = HttpContext.Session.GetString(SessionKeyURL);
+
+                return Redirect(PreviousURL ?? "/Perfil/Perfil");
             }
         }
 

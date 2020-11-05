@@ -127,9 +127,20 @@
 
                     <br>
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <button type="submit" id="recomendar" data-toggle="modal" data-target="#recomend-modal" class="btn btn-primary button1">Recomendar</button>
-                        </div>
+                        @if (!String.IsNullOrEmpty(Model.UsuarioActual))
+                        {
+                            <div class="col-md-8 col-md-offset-2">
+                                <button type="submit" id="recomendar" data-toggle="modal" data-target="#recomend-modal" class="btn btn-primary button1">Recomendar</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-8 col-md-offset-2">
+                                <form asp-page-handler="RecomendarVacio" method="post">
+                                    <button type="submit" id="recomendar_redirigir" class="btn btn-primary button1">Recomendar</button>
+                                </form>
+                            </div>
+                        }
                     </div>
 
                     <!-- Recomendacion Modal -->

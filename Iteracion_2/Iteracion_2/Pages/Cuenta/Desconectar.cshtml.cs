@@ -14,6 +14,7 @@ namespace Iteracion_2.Pages.Cuenta
             HttpContext.Session.Remove("UsuarioActual");
             HttpContext.Session.Remove("PesoMiembro");
             HttpContext.Session.Remove("TipoActual");
+            HttpContext.Session.Remove("PreviousURL");
             Response.Redirect("/Index");
         }
     }
