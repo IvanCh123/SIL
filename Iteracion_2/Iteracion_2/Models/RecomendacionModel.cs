@@ -40,7 +40,7 @@ namespace Iteracion_2.Models
             con.Close();
         }
 
-        internal bool RetornarHaRecomendado(string[] datos)
+        public bool RetornarHaRecomendado(string[] datos)
         {
             string query = "SELECT * FROM Miembro_Recomienda WHERE nombreUsuarioFK = @nombreUsuario AND artIdFK = @articuloId;";
             bool haRecomendado = false;
