@@ -14,7 +14,8 @@ namespace Iteracion_2.Pages.Articulos
         const string SessionKeyUsuario = "UsuarioActual";
         public String idArticulo { set; get; }
 
-        ArticuloController ArticuloContro { get; set; }
+        private ArticuloController ArticuloController { get; set; }
+        private RecomendacionController RecomendacionController { get; set; }
 
         public string[] InformacionArticulo { get; private set; }
         public List<string> Autor { get; private set; }
@@ -26,17 +27,24 @@ namespace Iteracion_2.Pages.Articulos
         public string Autores { get; set; }
 
         public string UsuarioActual { get; set; }
+        public bool haRecomendado { get; set; }
         public void OnGet(String ID)
         {
             idArticulo = ID;
             UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
 
-            ArticuloContro = new ArticuloController();
+            ArticuloController = new ArticuloController();
+            RecomendacionController = new RecomendacionController();
             Autores = "";
             topics = "";
-            InformacionArticulo = ArticuloContro.RetornarDatos(ID);
-            Autor = ArticuloContro.RetornarAutor(ID);
-            Topicos = ArticuloContro.RetornarTopico(ID);
+
+            if(!String.IsNullOrEmpty(UsuarioActual))
+                haRecomendado = RecomendacionController.RetornarHaRecomendado(new string[] {UsuarioActual, idArticulo});
+
+            InformacionArticulo = ArticuloController.RetornarDatos(ID);
+            Autor = ArticuloController.RetornarAutor(ID);
+            Topicos = ArticuloController.RetornarTopico(ID);
+
             for (int index = 0; index < Autor.Count; index++)
             {
                 if (index != 0)
@@ -55,10 +63,22 @@ namespace Iteracion_2.Pages.Articulos
             }
         }
 
-        public IActionResult OnPostRecomendarVacio() {
+        public IActionResult OnPostRecomendarSinUsuario() {
             HttpContext.Session.SetString("PreviousURL", Request.Headers["Referer"].ToString());
 
             return RedirectToPage("/Cuenta/Ingresar");
+        }
+
+        public IActionResult OnPostRecomendar() {
+            RecomendacionController = new RecomendacionController();
+            UsuarioActual = HttpContext.Session.GetString(SessionKeyUsuario);
+            idArticulo = Request.Form["articuloId"];
+
+            String[] recomendacion = {UsuarioActual, idArticulo, Request.Form["titulo"], Request.Form["comentario"] };
+
+            RecomendacionController.RecomendarArticulo(recomendacion);
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }

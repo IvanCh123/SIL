@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iteracion_2", "Iteracion_2\Iteracion_2.csproj", "{0CEB9C92-A62D-4D17-AFD7-32AF8BD8C280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasComunidadPractica", "PruebasComunidadPractica\PruebasComunidadPractica.csproj", "{0ABE844A-2E8A-4760-AE2E-AA8F96B5A5BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebasComunidadPractica", "PruebasComunidadPractica\PruebasComunidadPractica.csproj", "{0ABE844A-2E8A-4760-AE2E-AA8F96B5A5BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
