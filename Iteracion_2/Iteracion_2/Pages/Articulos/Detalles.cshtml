@@ -171,7 +171,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="comentario" class="col-form-label">Comentario</label>
-                                            <textarea class="form-control" name="comentario" id="comentario"></textarea>
+                                            <textarea class="form-control" name="comentario" id="comentario" oninvalid="this.setCustomValidity('Por favor, ingrese un comentario.')" oninput="setCustomValidity('')" required></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
