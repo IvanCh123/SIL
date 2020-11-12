@@ -38,7 +38,7 @@
                             <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
                         }
                     </p>
-                    <button onclick="myMod(@Model.RecomendacionesList[index][2], @Model.RecomendacionesList[index][3])" id="@index" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary button1">Ver Recomendacion</button>
+                    <button onclick="myMod('@Model.RecomendacionesList[index][2]', '@Model.RecomendacionesList[index][3]')" id="@index" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary button1">Ver Recomendacion</button>
                 </div>
             </div>
         </div>
@@ -77,7 +77,6 @@
         </div>
         <script>
             function myMod(tit, coment) {
-                console.log(tit);
                 var titulo = document.getElementById("titulo");
                 var comentario = document.getElementById("comentario");
                 titulo.innerHTML = tit;
