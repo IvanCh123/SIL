@@ -6,39 +6,86 @@
 }
 
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Shieldship | Recomendaciones</title>
-        <link rel="stylesheet" type="text/css" href="~/css/card.css" />
-    </head>
-    <body>
-        <h2 class="text-center"><strong>Muro de Recomendaciones</strong></h2>
-        <hr />
+<head>
+    <meta charset="utf-8" />
+    <title>Shieldship | Recomendaciones</title>
+    <link rel="stylesheet" type="text/css" href="~/css/card.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <h2 class="text-center"><strong>Muro de Recomendaciones</strong></h2>
+    <hr />
 
-        @for (int index = 0; index < Model.RecomendacionesList.Count; index++)
-        {
-            // 0 = artid 1 = titulo 2 = resumen 3 = autores 4 = usuarios
-            String[] autores = Model.RecomendacionesList[index][5].Split(",");
-            String[] usuarios = Model.RecomendacionesList[index][6].Split(",");
-            <div class="col d-flex justify-content-center">
-                <div class="card" style="width: 50%;">
-                    <div class="card-header">
-                        <strong>@Model.RecomendacionesList[index][2]</strong>
+    @for (int index = 0; index < Model.RecomendacionesList.Count; index++)
+    {
+        // 0 = artid 1 = titulo 2 = resumen 3 = autores 4 = usuarios
+        String[] autores = Model.RecomendacionesList[index][5].Split(",");
+        String[] usuarios = Model.RecomendacionesList[index][6].Split(",");
+        String titulo = Model.RecomendacionesList[index][2];
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <strong>@Model.RecomendacionesList[index][2]</strong>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><strong>@Model.RecomendacionesList[index][1]</strong></h5>
+                    <p class="card-text">
+                        @for (int indexJ = 0; indexJ < autores.Length; indexJ++)
+                        {
+                            <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
+                        }
+                    </p>
+                    <button onclick="myMod(@Model.RecomendacionesList[index][2], @Model.RecomendacionesList[index][3])" id="@index" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary button1">Ver Recomendacion</button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+    }
+        <div class="modal fade" id="exampleModal"
+             tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"
+                            id="titulo">
+                            Titulo de la recomendacion
+                        </h5>
+                        <button type="button" class="close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>@Model.RecomendacionesList[index][1]</strong></h5>
-                        <p class="card-text">
-                            @for (int indexJ = 0; indexJ < autores.Length; indexJ++)
-                            {
-                                <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
-                            }
-                        </p>
-                        <a href="#" class="btn btn-primary">Ver recomendación</a>
+                    <div class="modal-body">
+                        <p id="comentario"> comentario: </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal">
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+        <script>
+            function myMod(tit, coment) {
+                console.log(tit);
+                var titulo = document.getElementById("titulo");
+                var comentario = document.getElementById("comentario");
+                titulo.innerHTML = tit;
+                comentario.innerHTML = coment;
+            }
+        </script>
+</body>
 
-            <hr />
-        }
-    </body>
+
 </html>
+
