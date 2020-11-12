@@ -20,6 +20,11 @@ namespace Iteracion_2.Controllers
             RecomendacionModel.RecomendarArticulo(recomendacion);
         }
 
+        public List<List<string>> RetornarRecomendaciones()
+        {
+            return RecomendacionModel.RetornarRecomendaciones();
+        }
+
         public bool RetornarHaRecomendado(string[] datos)
         {
             return RecomendacionModel.RetornarHaRecomendado(datos);

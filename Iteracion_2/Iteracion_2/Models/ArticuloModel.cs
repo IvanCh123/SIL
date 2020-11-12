@@ -179,7 +179,7 @@ namespace Iteracion_2.Models
                 command.Parameters.AddWithValue("@nombreUsuario", nombreUsuarioActual);
             }
             else if (estado == "asignado") {
-                query = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK  = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NA ON A.artIdPK = NA.artIdFK WHERE NA.nombreUsuarioFK = @nombreUsuario AND NA.estadoRevision = 'asignado' ORDER BY A.artIdPK";
+                query = "SELECT DISTINCT A.artIdPK,A.titulo,A.resumen,M.nombre+' '+M.apellido AS [Nombre Completo],M.nombreUsuarioPK FROM Articulo A JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK JOIN Miembro M ON M.nombreUsuarioPK = MA.nombreUsuarioFK JOIN Nucleo_Revisa_Articulo NA ON A.artIdPK = NA.artIdFK WHERE NA.nombreUsuarioFK = @nombreUsuario AND NA.estadoRevision = 'asignado' ORDER BY A.artIdPK";
 
 
                 command = new SqlCommand(query, con)
@@ -245,8 +245,6 @@ namespace Iteracion_2.Models
                                     usuarios,
                         });
                     }
-
-                    
                 }
             }
 
