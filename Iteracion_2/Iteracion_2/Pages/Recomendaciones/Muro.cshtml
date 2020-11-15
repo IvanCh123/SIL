@@ -48,6 +48,9 @@
                             <a href="~/Perfil/Perfil?UsuarioURL=@usuarios[indexJ]">@autores[indexJ]</a>
                         }
                     </p>
+
+                    <a class="btn btn-primary button1" href="~/Articulos/Detalles?ID=@Model.RecomendacionesList[index][0]">Leer Artículo</a>
+
                     <button onclick="myMod('@Model.RecomendacionesList[index][2]', '@Model.RecomendacionesList[index][3]')" id="@index" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary button1">Ver Recomendacion</button>
                 </div>
             </div>
