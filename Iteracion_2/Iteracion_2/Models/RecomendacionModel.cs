@@ -43,7 +43,7 @@ namespace Iteracion_2.Models
         public List<List<string>> RetornarRecomendaciones()
         {
             Connection();
-            List<List<string>> RecomendacionesRetorno = new List<List<string>>();
+            
             DataTable dTable = new DataTable();
             string query = "SELECT A.artIdPK, A.titulo, MR.titulo as [Titulo Recomendacion], MR.comentario ,M2.nombre+' '+M2.apellido AS [Nombre Autor], M2.nombreUsuarioPK, M.nombre+' '+M.apellido AS [Recomendador], M.nombreUsuarioPK AS [UsuarioR]  " +
                 "FROM Articulo A " +
@@ -62,11 +62,18 @@ namespace Iteracion_2.Models
 
             con.Close();
 
+            return AcomodarRecomendaciones(dTable);
+        }
+
+
+        public List<List<string>> AcomodarRecomendaciones(DataTable dTable) {
+            List<List<string>> RecomendacionesRetorno = new List<List<string>>();
+
             for (int index = 0; index < dTable.Rows.Count; index++)
             {
                 string idAnterior = "";
                 string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
-                
+
 
                 if (index > 0)
                 {
@@ -86,7 +93,8 @@ namespace Iteracion_2.Models
                         if (indexJ > 0)
                             recomendadorAnterior = datosDeArticulo[indexJ - 1][7].ToString(); //recomendadorAnterior de la iteración pasada
 
-                        if (recomendadorActual != recomendadorAnterior) {
+                        if (recomendadorActual != recomendadorAnterior)
+                        {
 
                             List<List<string>> datosRecomendacion = new List<List<string>>();
                             //ahora generamos un arreglo de los de este id con el mismo recomendador
@@ -100,7 +108,8 @@ namespace Iteracion_2.Models
                                 else if (indexDR > 0)
                                     recomendadorP = datosDeArticulo[indexDR - 1][7].ToString();
 
-                                if (recomendadorA == recomendadorActual) {
+                                if (recomendadorA == recomendadorActual)
+                                {
                                     datosRecomendacion.Add(new List<string>
                                     {
                                         datosDeArticulo[indexDR][0].ToString(),
@@ -118,7 +127,8 @@ namespace Iteracion_2.Models
                             string autores = "";
                             string usuarios = "";
                             //ahora le buscamos los autores y usuarios del nuevo arreglo generado
-                            for (int indexDR = 0; indexDR < datosRecomendacion.Count; indexDR++) {
+                            for (int indexDR = 0; indexDR < datosRecomendacion.Count; indexDR++)
+                            {
                                 autores += datosRecomendacion[indexDR][4];
                                 usuarios += datosRecomendacion[indexDR][5];
                                 if (indexDR < datosRecomendacion.Count - 1)
@@ -142,9 +152,11 @@ namespace Iteracion_2.Models
 
                         }
                     }
-                    
+
                 }
             }
+
+
             return RecomendacionesRetorno;
         }
 
