@@ -22,14 +22,23 @@
 
     @for (int index = 0; index < Model.RecomendacionesList.Count; index++)
     {
-        // 0 = artid 1 = titulo 2 = resumen 3 = autores 4 = usuarios
-        String[] autores = Model.RecomendacionesList[index][5].Split(",");
-        String[] usuarios = Model.RecomendacionesList[index][6].Split(",");
-        String titulo = Model.RecomendacionesList[index][2];
+        /*
+         * 0 = artid 
+         * 1 = titulo del articulo 
+         * 2 = titulo recomendacion 
+         * 3 = comentario recomendacion 
+         * 4 = autores del articulo
+         * 5 = usuarios de los autores del articulo
+         * 6 = nombre del recomendador
+         * 7 = usuario del recomendador
+         */
+
+        String[] autores = Model.RecomendacionesList[index][4].Split(",");
+        String[] usuarios = Model.RecomendacionesList[index][5].Split(",");
         <div class="col d-flex justify-content-center">
             <div class="card" style="width: 50%;">
                 <div class="card-header">
-                    <strong>@Model.RecomendacionesList[index][2]</strong>
+                    <strong>@Model.RecomendacionesList[index][2] by </strong> <a href="~/Perfil/Perfil?UsuarioURL=@Model.RecomendacionesList[index][7]">@Model.RecomendacionesList[index][6]</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"><strong>@Model.RecomendacionesList[index][1]</strong></h5>
