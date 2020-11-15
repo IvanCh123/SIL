@@ -45,12 +45,12 @@ namespace Iteracion_2.Models
             Connection();
             List<List<string>> RecomendacionesRetorno = new List<List<string>>();
             DataTable dTable = new DataTable();
-            string query = "SELECT A.artIdPK, A.titulo, MR.titulo as [Titulo Recomendacion], MR.comentario ,M2.nombre+' '+M2.apellido AS [Nombre Autor], M2.nombreUsuarioPK, M.nombre+' '+M.apellido AS [Nombre Completo] " +
+            string query = "SELECT A.artIdPK, A.titulo, MR.titulo as [Titulo Recomendacion], MR.comentario ,M2.nombre+' '+M2.apellido AS [Nombre Autor], M2.nombreUsuarioPK, M.nombre+' '+M.apellido AS [Recomendador], M.nombreUsuarioPK AS [UsuarioR]  " +
                 "FROM Articulo A " +
                 "JOIN Miembro_Recomienda MR ON A.artIdPK = MR.artIdFK " +
                 "JOIN Miembro M ON M.nombreUsuarioPK = MR.nombreUsuarioFK " +
                 "JOIN Miembro_Articulo MA ON A.artIdPK = MA.artIdFK " +
-                "JOIN Miembro M2 ON M2.nombreUsuarioPK = MA.nombreUsuarioFK";
+                "JOIN Miembro M2 ON M2.nombreUsuarioPK = MA.nombreUsuarioFK ORDER BY A.artIdPK";
 
             SqlCommand command = new SqlCommand(query, con)
             {
@@ -66,6 +66,7 @@ namespace Iteracion_2.Models
             {
                 string idAnterior = "";
                 string idActual = dTable.Rows[index][0].ToString(); //ardIdPK actual
+                
 
                 if (index > 0)
                 {
@@ -76,29 +77,72 @@ namespace Iteracion_2.Models
                 {
                     DataRow[] datosDeArticulo = dTable.Select("artIdPK = " + idActual); // devuelve los autores con ese artIdPK
 
-                    string autores = "";
-                    string usuarios = "";
-
+                    //recorremos el subset que contiene todos los datos de un id
                     for (int indexJ = 0; indexJ < datosDeArticulo.Length; indexJ++)
                     {
-                        autores += datosDeArticulo[indexJ][4];
-                        usuarios += datosDeArticulo[indexJ][5];
-                        if (indexJ < datosDeArticulo.Length - 1)
-                        {
-                            autores += ",";
-                            usuarios += ",";
+                        string recomendadorAnterior = ""; //ardIdPK actual
+                        string recomendadorActual = datosDeArticulo[indexJ][7].ToString(); //ardIdPK actual
+
+                        if (indexJ > 0)
+                            recomendadorAnterior = datosDeArticulo[indexJ - 1][7].ToString(); //recomendadorAnterior de la iteración pasada
+
+                        if (recomendadorActual != recomendadorAnterior) {
+
+                            List<List<string>> datosRecomendacion = new List<List<string>>();
+                            //ahora generamos un arreglo de los de este id con el mismo recomendador
+                            for (int indexDR = 0; indexDR < datosDeArticulo.Length; indexDR++)
+                            {
+                                string recomendadorP = ""; //recomendador pasado
+                                string recomendadorA = datosDeArticulo[indexDR][7].ToString(); //recomendador actual
+
+                                if (indexDR == 0)
+                                    recomendadorP = recomendadorActual;
+                                else if (indexDR > 0)
+                                    recomendadorP = datosDeArticulo[indexDR - 1][7].ToString();
+
+                                if (recomendadorA == recomendadorActual) {
+                                    datosRecomendacion.Add(new List<string>
+                                    {
+                                        datosDeArticulo[indexDR][0].ToString(),
+                                        datosDeArticulo[indexDR][1].ToString(),
+                                        datosDeArticulo[indexDR][2].ToString(),
+                                        datosDeArticulo[indexDR][3].ToString(),
+                                        datosDeArticulo[indexDR][4].ToString(),
+                                        datosDeArticulo[indexDR][5].ToString(),
+                                        datosDeArticulo[indexDR][6].ToString(),
+                                        datosDeArticulo[indexDR][7].ToString()
+                                    });
+                                }
+                            }
+
+                            string autores = "";
+                            string usuarios = "";
+                            //ahora le buscamos los autores y usuarios del nuevo arreglo generado
+                            for (int indexDR = 0; indexDR < datosRecomendacion.Count; indexDR++) {
+                                autores += datosRecomendacion[indexDR][4];
+                                usuarios += datosRecomendacion[indexDR][5];
+                                if (indexDR < datosRecomendacion.Count - 1)
+                                {
+                                    autores += ",";
+                                    usuarios += ",";
+                                }
+                            }
+
+                            // utilizar la primera posicion del arreglo generado no el original
+                            RecomendacionesRetorno.Add(new List<string> {
+                                datosRecomendacion[0][0].ToString(), // artIdPK
+                                datosRecomendacion[0][1].ToString(), // Titulo artículo
+                                datosRecomendacion[0][2].ToString(), // Titulo Recomendacion
+                                datosRecomendacion[0][3].ToString(), // Comentario Recomendacion
+                                autores,
+                                usuarios,
+                                datosRecomendacion[0][6].ToString(), // Nombre Recomendador
+                                datosRecomendacion[0][7].ToString(), // Usuario Recomendador
+                            });
+
                         }
                     }
-
-                    RecomendacionesRetorno.Add(new List<string> {
-                            dTable.Rows[index][0].ToString(), // artIdPK
-                            dTable.Rows[index][1].ToString(), // Titulo artículo
-                            dTable.Rows[index][2].ToString(), // Titulo Recomendacion
-                            dTable.Rows[index][3].ToString(), // Comentario Recomendacion
-                            dTable.Rows[index][4].ToString(), // Nombre Recomendador
-                            autores,
-                            usuarios,                
-                    });
+                    
                 }
             }
             return RecomendacionesRetorno;
